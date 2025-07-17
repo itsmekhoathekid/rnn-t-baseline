@@ -1,0 +1,21 @@
+Predict text: nên thủ đoạn
+Ground truth: trở nên thụ động
+---------------
+Predict text: phía cho hỏi hiệu gặp
+Ground truth: cũng khiến cho họ dè
+---------------
+Predict text: rằng hỏi anh thể sông thể trở đã không cò
+Ground truth: chị hỏi anh thề sống thề chết là không có
+---------------
+Predict text: thể lê dân ba vùng phải nhất máy đúng phong
+Ground truth: điện thoại nhưng ta cũng phải nhấc máy đúng không
+---------------
+Predict text: thụ loại vị đặt nhất trong hệ mặt trời
+Ground truth: cũng thuộc loại dày đặc nhất trong hệ mặt trời
+---------------
+Predict text: vụ thơm rộng và bê bôi trình tên
+Ground truth: các vụ tham nhũng và bê bối kinh tế
+---------------
+Predict text: cứ cô lùi lại mặt dường ứng dữ trong chuyện
+Ground truth: chúng cứ cố lùi lại mặc dù vướng víu gông
+---------------

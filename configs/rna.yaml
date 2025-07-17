@@ -1,0 +1,59 @@
+
+  
+
+audio_data:
+  type: "log"
+  sampling_rate: 16000
+  window_size: 0.02
+  window_stride: 0.01
+  window: 'hamming'
+
+model:
+  type: transducer
+  enc:
+      type: lstm
+      hidden_size: 320
+      output_size: 320
+      n_layers: 4
+      bidirectional: True
+  dec:
+      type: lstm
+      embedding_size: 512
+      hidden_size: 512
+      output_size: 320
+      n_layers: 2
+  joint:
+      input_size: 640
+      inner_size: 512
+
+  vocab_size: 4866
+  feature_dim: 160
+  dropout: 0.3
+  name : 'rnn-t'
+  share_weight: False
+  
+
+training:
+  epochs: 100
+  batch_size: 1
+  save_path: "/home/anhkhoa/rnn-t/save_path"
+  train_path : "/home/anhkhoa/transformer_transducer/data/train.json"
+  dev_path : "/home/anhkhoa/transformer_transducer/data/dev.json"
+  test_path : "/home/anhkhoa/transformer_transducer/data/test.json"
+  vocab_path : "/home/anhkhoa/transformer_transducer/data/vocab.json"
+  reload: False
+
+
+optim:
+  type: sgd
+  lr: 0.0001
+  momentum: 0.9
+  weight_decay: 0
+  begin_to_adjust_lr: 60
+  nesterov: None
+  decay_rate: 0.5
+
+
+rna_loss:
+  blank: 4
+  reduction: "mean" 
