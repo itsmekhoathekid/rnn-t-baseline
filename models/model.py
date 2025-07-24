@@ -32,19 +32,7 @@ class JointNet(nn.Module):
         outputs = self.project_layer(outputs)
 
         return outputs
-    # def forward_rna(self, enc_state, dec_state):
-    #             # 🧠 Lấy trạng thái decoder cuối cùng hoặc mean
-    #     pooled_dec = dec_state[:, -1, :]  # (B, D𝒹)
-    #     # pooled_dec = dec_state.mean(dim=1)  # cũng được
 
-    #     # 🔁 Broadcast lên T timestep
-    #     pooled_dec = pooled_dec.unsqueeze(1).expand(-1, enc_state.size(1), -1)  # (B, T, D𝒹)
-
-    #     # 🔗 Nối vào encoder
-    #     joint_input = torch.cat((enc_state, pooled_dec), dim=-1)  # (B, T, Dₑ + D𝒹)
-
-    #     # 🔄 Project to vocab
-    #     logits = self.project_layer(joint_input)  # (B, T, V)
 
 class Transducer(nn.Module):
     def __init__(self, config):
@@ -108,6 +96,7 @@ class Transducer(nn.Module):
                 out = F.softmax(logits, dim=0).detach()
                 pred = torch.argmax(out, dim=0).item()
 
+                print(pred)
                 if pred == 2: 
                     break
 
@@ -119,8 +108,9 @@ class Transducer(nn.Module):
                     dec_state, hidden = self.decoder(token, hidden=hidden)
 
             return token_list
-
+        
         results = [decode(enc_states[i], inputs_length[i]) for i in range(batch_size)]
+
         return results
 
     # def recognize(self, inputs, inputs_length):
