@@ -59,8 +59,8 @@ class Speech2Text(Dataset):
         mel_extractor = T.MelSpectrogram(
             sample_rate=sample_rate,
             n_fft=512,
-            win_length=int(0.032 * sample_rate),
-            hop_length=int(0.010 * sample_rate),
+            win_length=25,
+            hop_length=10,
             n_mels=160,  # ✨ để đúng với Conv1d(in_channels=80)
             power=2.0
         )
