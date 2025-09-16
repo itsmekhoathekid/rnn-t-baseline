@@ -122,8 +122,7 @@ def main():
     # ==== Load Dataset ====
     train_dataset = Speech2Text(
         json_path=training_cfg['train_path'],
-        vocab_path=training_cfg['vocab_path'],
-        cmvn_stats=training_cfg['cmvn_stats'],
+        vocab_path=training_cfg['vocab_path']
     )
 
     train_loader = torch.utils.data.DataLoader(
@@ -135,8 +134,7 @@ def main():
 
     dev_dataset = Speech2Text(
         json_path=training_cfg['dev_path'],
-        vocab_path=training_cfg['vocab_path'],
-        cmvn_stats=training_cfg['cmvn_stats'],
+        vocab_path=training_cfg['vocab_path']
     )
 
     dev_loader = torch.utils.data.DataLoader(

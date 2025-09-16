@@ -1,0 +1,64 @@
+
+  
+
+audio_data:
+  type: "log"
+  sampling_rate: 16000
+  window_size: 0.02
+  window_stride: 0.01
+  window: 'hamming'
+
+model:
+  type: transducer
+  enc:
+      type: lstm
+      hidden_size: 320
+      output_size: 320
+      n_layers: 4
+      bidirectional: True
+  dec:
+      type: lstm
+      embedding_size: 512
+      hidden_size: 512
+      output_size: 320
+      n_layers: 2
+  joint:
+      input_size: 640
+      inner_size: 512
+
+  vocab_size: 134
+  feature_dim: 160
+  dropout: 0.3
+  name : 'rnn-t'
+  share_weight: False
+  
+
+training:
+  epochs: 100
+  batch_size: 2
+  save_path: "workspace/rnn-t-baseline/saves"
+  train_path : "workspace/dataset/train_phoneme.json"
+  dev_path : "workspace/dataset/test_phoneme.json"
+  test_path : "workspace/dataset/test_phoneme.json"
+  vocab_path : "workspace/dataset/vocab_phoneme.json"
+  reload: False
+
+
+optim:
+  type: sgd
+  lr: 0.0003
+  momentum: 0.9
+  weight_decay: 0
+  begin_to_adjust_lr: 60
+  nesterov: None
+  decay_rate: 0.5
+
+
+rnnt_loss:
+  blank: 0
+  reduction: "mean" 
+
+
+scheduler:
+  lr_init: 0.0003
+  warmup_steps: 25000
