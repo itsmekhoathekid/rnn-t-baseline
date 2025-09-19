@@ -12,5 +12,13 @@ gdown 1YgTF-NbHuweHWr2LahS_X9j--laGDnIK
 unzip -o voices.zip
 
 cd /
-python workspace/rnn-t-baseline/utils/construct.py
+if [[ "$1" == "phoneme" ]]; then
+    echo "Preprocessing for phoneme-based model"
+    python workspace/rnn-t-baseline/utils/construct_phoneme.py
+elif [[ "$1" == "char" ]]; then
+    echo "Preprocessing for normal model"
+    python workspace/rnn-t-baseline/utils/construct_char.py
+else
+    echo "Preprocessing for normal model"
+    python workspace/rnn-t-baseline/utils/construct.py
 mkdir workspace/rnn-t-baseline/saves
