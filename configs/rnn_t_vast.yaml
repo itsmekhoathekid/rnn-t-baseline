@@ -42,6 +42,7 @@ training:
   test_path : "workspace/dataset/test_phoneme.json"
   vocab_path : "workspace/dataset/vocab_phoneme.json"
   reload: False
+  logg: workspace/rnn-t-baseline/logs/rnn_t.log
 
 
 optim:

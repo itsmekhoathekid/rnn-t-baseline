@@ -63,14 +63,11 @@ class Transducer(nn.Module):
         )
 
     def forward(self, inputs, inputs_length, targets, targets_length):
-        zero = torch.zeros((targets.shape[0], 1)).long()
-        if targets.is_cuda: zero = zero.cuda()
-        
-        targets_add_blank = torch.cat((targets, zero), dim=1)
+
         
         enc_state, _ = self.encoder(inputs, inputs_length)
         
-        dec_state, _ = self.decoder(targets_add_blank, (targets_length+1).cpu())
+        dec_state, _ = self.decoder(targets, targets_length.cpu())
 
         # Joint network
         logits = self.joint(enc_state, dec_state)
@@ -96,7 +93,7 @@ class Transducer(nn.Module):
                 out = F.softmax(logits, dim=0).detach()
                 pred = torch.argmax(out, dim=0).item()
 
-                print(pred)
+                # print(pred)
                 if pred == 2: 
                     break
 
