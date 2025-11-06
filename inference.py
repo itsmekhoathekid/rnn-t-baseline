@@ -35,7 +35,7 @@ def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     #===Load Checkpoint===
-    checkpoint = torch.load(full_cfg["training"]["save_path"] + "/conv-rnnt_epoch_2", map_location=device)
+    checkpoint = torch.load(full_cfg["training"]["save_path"] + "/rnn-t_epoch_67", map_location=device)
     state_dict = checkpoint.get('model_state_dict', checkpoint)
 
     #===Load Model===
@@ -50,7 +50,7 @@ def main():
     eos_id  = dataset.vocab.get_eos_token()
 
     loader = DataLoader(dataset,
-                        batch_size=1,
+                        batch_size=full_cfg["training"].get("batch_size", 1),
                         shuffle=False,
                         collate_fn=speech_collate_fn)
 
@@ -58,7 +58,7 @@ def main():
     true_texts = []
 
     with open(full_cfg["training"]["result"], 'w', encoding='utf-8') as fout:
-        for batch in loader:
+        for batch in tqdm(loader, desc = "Inferencing"):
             fbanks     = batch['fbank'].to(device)
             fbank_lens = batch['fbank_len'].to(device)
 
@@ -74,13 +74,17 @@ def main():
 
                 pred_texts.append(pred_text)
                 true_texts.append(true_text)
+                wer_score = wer(true_text, pred_text)
+                cer_score = cer(true_text, pred_text)
+                
                 print(f"Predict text: {pred_text}")
                 print(f"Ground truth: {true_text}")
+                print(f"WER: {wer_score:.4f}, CER: {cer_score:.4f}")
                 fout.write(f"Predict text: {pred_text}\n")
                 fout.write(f"Ground truth: {true_text}\n")
                 fout.write("---------------\n")
 
-    print(f"Inference complete. Results saved to {full_cfg["training"]["result"]}")
+    print(f"Inference complete. Results saved to {full_cfg['training']['result']}")
 
     #===TÍNH WER VÀ CER===
     overall_wer = wer(true_texts, pred_texts)

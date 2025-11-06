@@ -37,11 +37,12 @@ training:
   epochs: 100
   batch_size: 1
   save_path: "/home/anhkhoa/rnn-t/save_path"
-  train_path : "/home/anhkhoa/transformer_transducer/data/train.json"
-  dev_path : "/home/anhkhoa/transformer_transducer/data/dev.json"
-  test_path : "/home/anhkhoa/transformer_transducer/data/test.json"
-  vocab_path : "/home/anhkhoa/transformer_transducer/data/vocab.json"
+  train_path : "/home/anhkhoa/transformer_transducer_speeQ/data/train_w2i.json"
+  dev_path : "/home/anhkhoa/transformer_transducer_speeQ/data/test_w2i.json"
+  test_path : "/home/anhkhoa/transformer_transducer_speeQ/data/test_w2i.json"
+  vocab_path : "/home/anhkhoa/transformer_transducer_speeQ/data/vocab_w2i.json"
   reload: False
+  result: "/home/anhkhoa/rnn-t/inference_results_old.txt"
 
 
 optim:

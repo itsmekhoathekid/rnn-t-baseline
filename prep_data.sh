@@ -21,4 +21,5 @@ elif [[ "$1" == "char" ]]; then
 else
     echo "Preprocessing for normal model"
     python workspace/rnn-t-baseline/utils/construct.py
+fi
 mkdir workspace/rnn-t-baseline/saves
